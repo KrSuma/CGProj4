@@ -1,0 +1,54 @@
+﻿<Window x:Class="CGProj4.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CGProj4"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TabStripPlacement="Top">
+            <TabItem Header="Clipping">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="150" />
+                    </Grid.ColumnDefinitions>
+                    <Canvas Name="ClippingCanvas" Focusable="True" Background="White" MouseLeftButtonDown="ClippingCanvasClick" MouseRightButtonDown="ClippingReset" />
+                    <StackPanel Grid.Column="1">
+                        <Label FontSize="12" FontWeight="Bold">Clip polygons</Label>
+                        <Button Name="ClippingButton" IsEnabled="False" Click="ClippingButton_Click">Clip</Button>
+                        <Button Name="ClippedOnlyButton" IsEnabled="False" Click="ClippedOnlyButton_Click">Clipped Only</Button>
+                        <Button Name="ResetButton" IsEnabled="True" Click="ResetButton_Click">Clear</Button>
+                        <Label FontSize="12" FontWeight="Bold">Random positions</Label>
+                        <Button Name="AddTriangle" IsEnabled="True" Click="AddTriangle_Click">Test Triangle</Button>
+                        <Button Name="AddRectangle" IsEnabled="True" Click="AddRectangle_Click">Test Rectangle</Button>
+                        <Label FontSize="12" FontWeight="Bold">Random polygon</Label>
+                        <Button Name="AddConcave" IsEnabled="True" Click="AddConcave_Click">Make sure it's concave!</Button>
+                        <Button Name="AddConvex" IsEnabled="True" Click="AddConvex_Click">Test Rectangle</Button>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Filling">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="150" />
+                    </Grid.ColumnDefinitions>
+                    <Canvas Name="FillingCanvas" Grid.Column="0" Focusable="True" Background="White" MouseLeftButtonDown="FillingCanvas_Click" MouseRightButtonDown="FillingCanvas_RightClick" />
+                    <StackPanel Grid.Column="1">
+                        <Label FontSize="12" FontWeight="Bold">Number of vertices:</Label>
+                        <DockPanel VerticalAlignment="Center" Margin="5">
+                            <TextBox Text="{Binding ElementName=FillVertexSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="30" TextChanged="FillVerticesChanged" />
+                            <Slider Minimum ="3" Maximum="10" IsSnapToTickEnabled="True" Name="FillVertexSlider" />
+                        </DockPanel>
+                        <Label FontSize="12" FontWeight="Bold">Vertices:</Label>
+                        <ListView Name="FillVerticesListView" Height="200" />
+                        <Button Name="FillButton" Click="FillButton_Click" IsEnabled="False">Fill polygon</Button>
+                        <Button Name="FillResetButton" IsEnabled="True" Click="FillResetButton_Click">Clear</Button>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
